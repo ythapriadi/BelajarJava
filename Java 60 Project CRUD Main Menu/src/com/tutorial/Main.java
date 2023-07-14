@@ -78,7 +78,7 @@ public class Main {
         BufferedReader bufferedInput = new BufferedReader(fileInput);
 
 //        Buat database Sementara
-        File tempDB = new File("tempDB");
+        File tempDB = new File("tempDB.txt");
         FileWriter fileOutput = new FileWriter(tempDB);
         BufferedWriter bufferedOutput = new BufferedWriter(fileOutput);
 
