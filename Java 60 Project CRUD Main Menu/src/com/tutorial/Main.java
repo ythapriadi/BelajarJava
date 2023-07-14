@@ -112,20 +112,25 @@ public class Main {
                 //Update data
 
                 //Mengambil input dari user
-                String[] fieldData = {"penulis", "judul","penerbit","tahun"};
+                String[] fieldData = {"tahun","penulis","penerbit","judul"};
                 String[] tempData = new String[4];
-                for (int i = 0; i < fieldData.length ; i++){
-                   boolean isUpdate = getYesorNo("Apakah anda ingin merubah nama " + field);
 
+                //refresh token
+                st = new StringTokenizer(data, ",");
+                for (int i = 0; i < fieldData.length ; i++){
+                   boolean isUpdate = getYesorNo("Apakah anda ingin merubah nama " + fieldData[i]);
+
+                   String originalData = st.nextToken();
                    if (isUpdate){
                        //user Input
                        terminalInput = new Scanner(System.in);
-                       System.out.println("\nMasukkan " + fieldData[1] + "baru" );
-                       tempData[1] = terminalInput.nextLine();
+                       System.out.print("\nMasukkan " + fieldData[i] + " baru : " );
+                       tempData[i] = terminalInput.nextLine();
                    }else {
-                       tempData[1] = fieldData[1];
+                       tempData[i] = originalData;
                    }
                 }
+
                 System.out.println(Arrays.toString(tempData));
             }else {
 
