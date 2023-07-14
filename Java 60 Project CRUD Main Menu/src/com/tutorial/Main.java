@@ -141,7 +141,14 @@ public class Main {
                 System.out.println("Penerbit       : " + st.nextToken() + " ----> " + tempData[2]);
                 System.out.println("Judul          : " + st.nextToken() + " ----> " + tempData[3]);
 
-                System.out.println(Arrays.toString(tempData));
+                boolean isUpdate = getYesorNo("apakah anda yakin ingin mengupdate data tersebut");
+                if (isUpdate){
+
+                }else{
+                    bufferedOutput.write(data);
+                    bufferedOutput.newLine();
+                }
+
             }else {
 
                 //Copy data
