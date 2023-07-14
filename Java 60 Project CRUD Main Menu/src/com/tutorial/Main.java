@@ -91,7 +91,26 @@ public class Main {
         System.out.println("\nMasukkan no buku yang akan di update");
         int updateNum = terminalInput.nextInt();
 
-//        tampilkan yang data yang inin di update
+//        tampilkan yang data yang ingin di update
+        String data = bufferedInput.readLine();
+        int entryCounts = 0;
+
+        while (data != null){
+            entryCounts++;
+
+            StringTokenizer st = new StringTokenizer(data, ",");
+//            tampilkan entriCounts == updateNum
+            if (updateNum == entryCounts){
+                System.out.println("\nData yang ingin anda update adalah : ");
+                System.out.println("-----------------------------------------");
+                System.out.println("Referensi      : " + st.nextToken());
+                System.out.println("Tahun          : " + st.nextToken());
+                System.out.println("Penulis        : " + st.nextToken());
+                System.out.println("Penerbit       : " + st.nextToken());
+                System.out.println("Judul          : " + st.nextToken());
+            }
+            data = bufferedInput.readLine();
+        }
     }
 
     private static void deleteData() throws  IOException{
