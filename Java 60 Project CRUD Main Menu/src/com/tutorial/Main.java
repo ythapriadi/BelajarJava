@@ -87,6 +87,10 @@ public class Main {
         tampilkanData();
 
 //        mengambil user input / pilihan data
+        Scanner terminalInput = new Scanner(System.in);
+        System.out.println("\nMasukkan no buku yang akan di update");
+        int updateNum = terminalInput.nextInt();
+
 //        tampilkan yang data yang inin di update
     }
 
