@@ -131,6 +131,16 @@ public class Main {
                    }
                 }
 
+                //Tampilkan data baru ke layar
+                st = new StringTokenizer(data, ",");
+                st.nextToken();
+                System.out.println("\nData baru anda adalah ");
+                System.out.println("-----------------------------------------");
+                System.out.println("Tahun          : " + st.nextToken() + " ----> " + tempData[0]);
+                System.out.println("Penulis        : " + st.nextToken() + " ----> " + tempData[1]);
+                System.out.println("Penerbit       : " + st.nextToken() + " ----> " + tempData[2]);
+                System.out.println("Judul          : " + st.nextToken() + " ----> " + tempData[3]);
+
                 System.out.println(Arrays.toString(tempData));
             }else {
 
