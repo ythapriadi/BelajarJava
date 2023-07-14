@@ -83,6 +83,9 @@ public class Main {
         BufferedWriter bufferedOutput = new BufferedWriter(fileOutput);
 
 //        tampilkan data
+        System.out.println("List Buku");
+        tampilkanData();
+
 //        mengambil user input / pilihan data
 //        tampilkan yang data yang inin di update
     }
