@@ -108,9 +108,35 @@ public class Main {
                 System.out.println("Penulis        : " + st.nextToken());
                 System.out.println("Penerbit       : " + st.nextToken());
                 System.out.println("Judul          : " + st.nextToken());
+
+                //Update data
+
+                //Mengambil input dari user
+                String[] fieldData = {"penulis", "judul","penerbit","tahun"};
+                String[] tempData = new String[4];
+                for (int i = 0; i < fieldData.length ; i++){
+                   boolean isUpdate = getYesorNo("Apakah anda ingin merubah nama " + field);
+
+                   if (isUpdate){
+                       //user Input
+                       terminalInput = new Scanner(System.in);
+                       System.out.println("\nMasukkan " + fieldData[1] + "baru" );
+                       tempData[1] = terminalInput.nextLine();
+                   }else {
+                       tempData[1] = fieldData[1];
+                   }
+                }
+                System.out.println(Arrays.toString(tempData));
+            }else {
+
+                //Copy data
+                bufferedOutput.write(data);
+                bufferedOutput.newLine();
+
             }
             data = bufferedInput.readLine();
         }
+        bufferedOutput.flush();
     }
 
     private static void deleteData() throws  IOException{
