@@ -76,7 +76,12 @@ public class Main {
         File database = new File("database.txt");
         FileReader fileInput = new FileReader(database);
         BufferedReader bufferedInput = new BufferedReader(fileInput);
+
 //        Buat database Sementara
+        File tempDB = new File("tempDB");
+        FileWriter fileOutput = new FileWriter(tempDB);
+        BufferedWriter bufferedOutput = new BufferedWriter(fileOutput);
+
 //        tampilkan data
 //        mengambil user input / pilihan data
 //        tampilkan yang data yang inin di update
