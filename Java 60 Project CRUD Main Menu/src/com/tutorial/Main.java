@@ -35,32 +35,32 @@ public class Main {
                     System.out.println("\n===================");
                     System.out.println("LIST SELURUH BUKU");
                     System.out.println("===================");
-                    tampilkanData(); //Tampilkan data
+                    Operasi.tampilkanData(); //Tampilkan data
                     break;
                 case "2":
                     System.out.println("\n===================");
                     System.out.println("CARI DATA BUKU"); //Cari Data
                     System.out.println("===================");
-                    cariData();
+                    Operasi.cariData();
                     break;
                 case "3":
                     System.out.println("\n===================");
                     System.out.println("TAMBAH DATA BUKU");
                     System.out.println("===================");
-                    tambahData();
-                    tampilkanData();
+                    Operasi.tambahData();
+                    Operasi.tampilkanData();
                     break;
                 case "4":
                     System.out.println("\n===================");
                     System.out.println("UBAH DATA BUKU");
                     System.out.println("===================");
-                    updateData();
+                    Operasi.updateData();
                     break;
                 case "5":
                     System.out.println("\n===================");
                     System.out.println("HAPUS DATA BUKU");
                     System.out.println("===================");
-                    deleteData();
+                    Operasi.deleteData();
                     break;
                 default:
                     System.err.println("\nInput anda tidak ditemukan\nSilahkan pilih (1-5)");
