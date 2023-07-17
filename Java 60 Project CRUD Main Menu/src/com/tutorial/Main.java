@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 //import CRUD library
 import CRUD.Operasi;
+import CRUD.Utility;
 
 
 public class Main {
@@ -18,7 +19,7 @@ public class Main {
 
         while (istLanjutkan) {
 
-            clearScreen();
+            Utility.clearScreen();
 
             System.out.println("database Perpustakaan\n");
             System.out.println("1.\tLihat Seluruh Buku");
@@ -66,7 +67,7 @@ public class Main {
                     System.err.println("\nInput anda tidak ditemukan\nSilahkan pilih (1-5)");
             }
 
-            istLanjutkan = getYesorNo("Apakah anda ingin melanjutkan ?");
+            istLanjutkan = Utility.getYesorNo("Apakah anda ingin melanjutkan ?");
 
         }
     }

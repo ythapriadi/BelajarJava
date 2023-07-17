@@ -56,14 +56,14 @@ public class Operasi {
                 String originalData = st.nextToken();
 
                 for (int i = 0; i < fieldData.length ; i++){
-                    boolean isUpdate = getYesorNo("Apakah anda ingin merubah nama " + fieldData[i]);
+                    boolean isUpdate = Utility.getYesorNo("Apakah anda ingin merubah nama " + fieldData[i]);
                     originalData = st.nextToken();
                     if (isUpdate){
                         //user Input
 
                         if (fieldData[i].equalsIgnoreCase("tahun")){
                             System.out.print("Masukan tahun terbit, format = YYYY : ");
-                            tempData[i] =ambilTahun();
+                            tempData[i] = Utility.ambilTahun();
                         }else{
                             terminalInput = new Scanner(System.in);
                             System.out.print("\nMasukkan " + fieldData[i] + " baru : " );
@@ -85,11 +85,11 @@ public class Operasi {
                 System.out.println("Penerbit       : " + st.nextToken() + " ----> " + tempData[2]);
                 System.out.println("Judul          : " + st.nextToken() + " ----> " + tempData[3]);
 
-                boolean isUpdate = getYesorNo("apakah anda yakin ingin mengupdate data tersebut");
+                boolean isUpdate = Utility.getYesorNo("apakah anda yakin ingin mengupdate data tersebut");
 
                 if (isUpdate){
                     //cek data baru di database
-                    boolean isExist = cekBukuDiDatabase(tempData,true);
+                    boolean isExist = Utility.cekBukuDiDatabase(tempData,true);
                     if (isExist){
                         System.err.println("Data buku sudah ada didatabase, proses update dibatalkan,\nsilahkan delete data yang bersangkutan");
                         // Copy data
@@ -103,7 +103,7 @@ public class Operasi {
                         String judul = tempData[3];
 
                         //buat primary key
-                        long nomorEntry = ambilEntryPertahun(penulis, tahun) + 1;
+                        long nomorEntry = Utility.ambilEntryPertahun(penulis, tahun) + 1;
 
                         String penulisTanpaSpasi =  penulis.replaceAll("\\s+","");
                         String primaryKey = penulisTanpaSpasi + "_" + tahun + "_" + nomorEntry;
@@ -178,7 +178,7 @@ public class Operasi {
                 System.out.println("Penerbit        : " + st.nextToken());
                 System.out.println("Judul           : " + st.nextToken());
 
-                isDelete = getYesorNo("Apakah anda yakin akan menghapus?");
+                isDelete = Utility.getYesorNo("Apakah anda yakin akan menghapus?");
                 isFound = true;
             }
 
@@ -268,7 +268,7 @@ public class Operasi {
         String[] keywords = cariString.split("\\s+");
 
 //        Kita Cek keyword di database
-        cekBukuDiDatabase(keywords,true);
+        Utility.cekBukuDiDatabase(keywords,true);
     }
 
     public static void tambahData() throws IOException{
@@ -287,19 +287,19 @@ public class Operasi {
         System.out.print("Masukkan Nama Penerbit : ");
         penerbit = terminalInput.nextLine();
         System.out.print("Masukkan Tahun terbit, format = (YYYY) :  ");
-        tahun = ambilTahun();
+        tahun = Utility.ambilTahun();
 
         //cek buku di database
         String[] keywords = {tahun + ","+ penulis + "," + penerbit + "," + judul};
         System.out.println(Arrays.toString(keywords));
 
-        boolean isExist = cekBukuDiDatabase(keywords, false);
+        boolean isExist = Utility.cekBukuDiDatabase(keywords, false);
 
         //Menulis buku di database
         if (!isExist){
             //fiersabesari_2012_1,2012,fiersa besari,media kita,jejak langkah
-            System.out.println(ambilEntryPertahun(penulis, tahun));
-            long nomorEntry = ambilEntryPertahun(penulis, tahun) + 1;
+            System.out.println(Utility.ambilEntryPertahun(penulis, tahun));
+            long nomorEntry = Utility.ambilEntryPertahun(penulis, tahun) + 1;
 
             String penulisTanpaSpasi =  penulis.replaceAll("\\s+","");
             String primaryKey = penulisTanpaSpasi + "_" + tahun + "_" + nomorEntry;
@@ -311,7 +311,7 @@ public class Operasi {
             System.out.println("Penerbit      : " + penerbit);
             System.out.println("Judul         : " + judul);
 
-            boolean isTambah = getYesorNo("Apakah anda ingin menambahkan data tersebut ?");
+            boolean isTambah = Utility.getYesorNo("Apakah anda ingin menambahkan data tersebut ?");
             if (isTambah){
                 bufferedOutput.write(primaryKey + "," + tahun + "," + penulis + "," + penerbit + "," + judul);
                 bufferedOutput.newLine();
@@ -319,7 +319,7 @@ public class Operasi {
             }
         } else {
             System.out.println("Buku yang anda akan masukan sudah tersedia di database dengan data berikut");
-            cekBukuDiDatabase(keywords, true);
+            Utility.cekBukuDiDatabase(keywords, true);
         }
 
         bufferedOutput.close();

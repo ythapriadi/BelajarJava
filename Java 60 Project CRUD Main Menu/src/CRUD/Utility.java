@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class Utility {
 
-    private static long ambilEntryPertahun(String penulis, String tahun) throws IOException {
+    static long ambilEntryPertahun(String penulis, String tahun) throws IOException {
         FileReader fileInput = new FileReader("database.txt");
         BufferedReader bufferedInput = new BufferedReader(fileInput);
 
@@ -35,7 +35,8 @@ public class Utility {
         return entry;
     }
 
-    private static boolean cekBukuDiDatabase(String[] keywords, boolean isDisplay)throws IOException{
+    //Default Access Modifier
+    static boolean cekBukuDiDatabase(String[] keywords, boolean isDisplay)throws IOException{
 
         FileReader fileInput = new FileReader("database.txt");
         BufferedReader bufferedInput = new BufferedReader(fileInput);
@@ -85,7 +86,7 @@ public class Utility {
         return isExist;
     }
 
-    private static String ambilTahun() throws IOException{
+    protected static String ambilTahun() throws IOException{
         boolean tahunValid = false;
         Scanner terminalInput = new Scanner(System.in);
         String tahunInput = terminalInput.nextLine();
@@ -103,7 +104,7 @@ public class Utility {
         return tahunInput;
     }
 
-    private static boolean getYesorNo (String message){
+    public static boolean getYesorNo (String message){
         Scanner terminalInput = new Scanner(System.in);
         System.out.print("\n" + message + "(y/n) ?");
         String pilihanUser = terminalInput.next();
@@ -118,7 +119,7 @@ public class Utility {
 
     }
 
-    private static void clearScreen( ){
+    public static void clearScreen( ){
         try {
             if (System.getProperty("os.name").contains("Windows")){
                 new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
