@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Operasi {
 
-    private static void updateData () throws IOException {
+    public static void updateData () throws IOException {
 //        Mengambil database original
         File database = new File("database.txt");
         FileReader fileInput = new FileReader(database);
@@ -135,7 +135,7 @@ public class Operasi {
         tempDB.renameTo(database);
     }
 
-    private static void deleteData() throws  IOException{
+    public static void deleteData() throws  IOException{
         // kita ambil database original
         File database = new File("database.txt");
         FileReader fileInput = new FileReader(database);
@@ -210,7 +210,7 @@ public class Operasi {
         tempDB.renameTo(database);
     }
 
-    private static void tampilkanData() throws IOException{
+    public static void tampilkanData() throws IOException{
         FileReader fileInput;
         BufferedReader bufferedInput;
 
@@ -247,7 +247,7 @@ public class Operasi {
 
     }
 
-    private static void cariData () throws IOException{
+    public static void cariData () throws IOException{
 
 //        Membaca adtabase
         try {
@@ -271,7 +271,7 @@ public class Operasi {
         cekBukuDiDatabase(keywords,true);
     }
 
-    private static void tambahData() throws IOException{
+    public static void tambahData() throws IOException{
 
         FileWriter fileOutput = new FileWriter("database.txt",true);
         BufferedWriter bufferedOutput = new BufferedWriter(fileOutput);
