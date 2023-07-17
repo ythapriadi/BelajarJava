@@ -88,7 +88,7 @@ public class Main {
 
 //        mengambil user input / pilihan data
         Scanner terminalInput = new Scanner(System.in);
-        System.out.println("\nMasukkan no buku yang akan di update");
+        System.out.print("\nMasukkan no buku yang akan di update : ");
         int updateNum = terminalInput.nextInt();
 
 //        tampilkan yang data yang ingin di update
@@ -117,15 +117,23 @@ public class Main {
 
                 //refresh token
                 st = new StringTokenizer(data, ",");
+                String originalData = st.nextToken();
+
                 for (int i = 0; i < fieldData.length ; i++){
                    boolean isUpdate = getYesorNo("Apakah anda ingin merubah nama " + fieldData[i]);
-
-                   String originalData = st.nextToken();
+                   originalData = st.nextToken();
                    if (isUpdate){
                        //user Input
-                       terminalInput = new Scanner(System.in);
-                       System.out.print("\nMasukkan " + fieldData[i] + " baru : " );
-                       tempData[i] = terminalInput.nextLine();
+
+                       if (fieldData[i].equalsIgnoreCase("tahun")){
+                           System.out.print("Masukan tahun terbit, format = YYYY : ");
+                           tempData[i] =ambilTahun();
+                       }else{
+                           terminalInput = new Scanner(System.in);
+                           System.out.print("\nMasukkan " + fieldData[i] + " baru : " );
+                           tempData[i] = terminalInput.nextLine();
+
+                       }
                    }else {
                        tempData[i] = originalData;
                    }
@@ -142,23 +150,53 @@ public class Main {
                 System.out.println("Judul          : " + st.nextToken() + " ----> " + tempData[3]);
 
                 boolean isUpdate = getYesorNo("apakah anda yakin ingin mengupdate data tersebut");
-                if (isUpdate){
 
+                if (isUpdate){
+                    //cek data baru di database
+                    boolean isExist = cekBukuDiDatabase(tempData,true);
+                    if (isExist){
+                        System.err.println("Data buku sudah ada didatabase, proses update dibatalkan,\nsilahkan delete data yang bersangkutan");
+                        // Copy data
+                        bufferedOutput.write(data);
+                    }else{
+
+                        //Format data baru ke database
+                        String tahun = tempData[0];
+                        String penulis = tempData[1];
+                        String penerbit = tempData[2];
+                        String judul = tempData[3];
+
+                        //buat primary key
+                        long nomorEntry = ambilEntryPertahun(penulis, tahun) + 1;
+
+                        String penulisTanpaSpasi =  penulis.replaceAll("\\s+","");
+                        String primaryKey = penulisTanpaSpasi + "_" + tahun + "_" + nomorEntry;
+
+                        //tulis data ke database
+                        bufferedOutput.write(primaryKey + "," + tahun + "," + penulis + "," + penerbit + "," + judul);
+                    }
                 }else{
                     bufferedOutput.write(data);
-                    bufferedOutput.newLine();
                 }
-
             }else {
-
                 //Copy data
                 bufferedOutput.write(data);
-                bufferedOutput.newLine();
-
             }
+            bufferedOutput.newLine();
             data = bufferedInput.readLine();
         }
+        //menulis data ke file
         bufferedOutput.flush();
+        bufferedOutput.close();
+        fileOutput.close();
+        bufferedInput.close();
+        fileInput.close();
+
+        System.gc();
+        //delete original database
+        database.delete();
+        //rename file tempDB menjadi database
+        tempDB.renameTo(database);
     }
 
     private static void deleteData() throws  IOException{
@@ -226,6 +264,7 @@ public class Main {
         // menulis data ke file
         bufferedOutput.flush();
         // delete original file
+        bufferedOutput.close();
         fileOutput.close();
         bufferedInput.close();
         fileInput.close();
@@ -333,12 +372,12 @@ public class Main {
             System.out.println("Primary Key   : " + primaryKey);
             System.out.println("Tahun terbit  : " + tahun);
             System.out.println("Penulis       : " + penulis);
-            System.out.println("Judul         : " + judul);
             System.out.println("Penerbit      : " + penerbit);
+            System.out.println("Judul         : " + judul);
 
             boolean isTambah = getYesorNo("Apakah anda ingin menambahkan data tersebut ?");
             if (isTambah){
-                bufferedOutput.write(primaryKey + "," + tahun + "," + penulis + "," + penerbit + "," + judul + ",");
+                bufferedOutput.write(primaryKey + "," + tahun + "," + penulis + "," + penerbit + "," + judul);
                 bufferedOutput.newLine();
                 bufferedOutput.flush();
             }
